@@ -1,6 +1,6 @@
 import unittest
 from s_tree import SuffixTree # Import the SuffixTree class
-from sent_gust_first import find_tandem_repeats  # Import the find_tandem_repeats function
+from gust_tandem import find_tandem_repeats  # Import the find_tandem_repeats function
 
 class TestTandemRepeats(unittest.TestCase):
     """
@@ -32,7 +32,7 @@ class TestTandemRepeats(unittest.TestCase):
         btr, nbtr = find_tandem_repeats(tree)
 
         # Assert branching repeats are detected at expected positions
-        self.assertIn((3, 4), btr)  # "TGAC" is a branching repeat
+        self.assertIn((3, 4), btr)  # "GACT" is a branching repeat
         self.assertIn((10, 1), btr)  # "TT" is a branching repeat
         self.assertIn((2, 4), nbtr)  # "TGAC" is non-branching
         self.assertIn((0, 4), nbtr)  # "ACTG" is non-branching
@@ -42,7 +42,7 @@ class TestTandemRepeats(unittest.TestCase):
         """
         Test case for overlapping non-branching repeats where repeats share characters.
         """
-        text = "ABAABAABB"
+        text = "ABAABAABBBA"
         tree = SuffixTree(text)
         btr, nbtr = find_tandem_repeats(tree)
 
