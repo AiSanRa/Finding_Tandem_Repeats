@@ -5,7 +5,7 @@ class SuffixTreeNode:
         self.min_dfs = None
         self.max_dfs = None
         self.dfs_number = None
-        self.string_depth = 0  # Tracks the depth of the substring represented by this node
+        self.string_depth = 0  
 
 
 class SuffixTree:
