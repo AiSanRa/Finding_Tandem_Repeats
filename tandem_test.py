@@ -67,6 +67,19 @@ class TestTandemRepeats(unittest.TestCase):
         self.assertEqual(btr, [])
         self.assertEqual(nbtr, [])
 
+    def test_for_fun(self):
+        """
+        Test case with the string "mississippi" that is commonly used
+        """
+        text = "mississippi"
+        tree = SuffixTree(text)
+        btr, nbtr = find_tandem_repeats(tree)
+
+        self.assertIn((1, 3), nbtr)  # "mis" is a non-branching repeat
+        self.assertIn((2, 1), btr)  # "i" is a branching repeat
+        self.assertIn((2, 3), btr)  # "iss" is a branching repeat
+        self.assertIn((5, 1), btr)  # "s" is a branching repeat
+        self.assertIn((8, 1), btr)  # "p" is a branching repeat
 
 if __name__ == "__main__":
     unittest.main()
