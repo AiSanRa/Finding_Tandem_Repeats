@@ -5,10 +5,8 @@ import seaborn as sns
 import sys
 sys.setrecursionlimit(10000)
 
-# Assuming the SuffixTree and SuffixTreeNode classes are already defined
-# from your previous code
 from s_tree import SuffixTreeNode
-from s_tree import SuffixTree  # Import the class from the other file
+from s_tree import SuffixTree
 
 def generate_random_string(length):
     """Generate a random string of the given length containing the characters A, C, T, G, and a terminating '$'"""

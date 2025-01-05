@@ -1,8 +1,8 @@
 import time
 import matplotlib.pyplot as plt
 import seaborn as sns
-from s_tree import SuffixTree  # Assuming SuffixTree is correctly implemented and available
-from gust_tandem import find_tandem_repeats  # Import the tandem repeat detection function
+from s_tree import SuffixTree 
+from gust_tandem import find_tandem_repeats 
 import sys
 
 sys.setrecursionlimit(10000)
