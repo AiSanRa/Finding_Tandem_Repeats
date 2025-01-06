@@ -1,11 +1,11 @@
 import unittest
-from tree import SuffixTree  #Import tree
+from tree import SuffixTree 
 
 class TestSuffixTree(unittest.TestCase):
     def setUp(self):
         """Initialize a SuffixTree for the string 'banana$'."""
         self.string = "banana$"
-        self.tree = SuffixTree(self.string)  # Use the full string including '$'
+        self.tree = SuffixTree(self.string) 
 
     def test_number_of_leaves(self):
         """Verify that the number of leaves matches the length of the string."""
@@ -23,7 +23,7 @@ class TestSuffixTree(unittest.TestCase):
         """Check that DFS order covers all leaves with sequential DFS numbers."""
         def collect_dfs_numbers(node, dfs_numbers):
             """Recursive DFS collection for leaf nodes with their assigned DFS numbers."""
-            if node.dfs_number is not None:  # Leaf node
+            if node.dfs_number is not None: 
                 dfs_numbers.append(node.dfs_number)
             for child in node.children.values():
                 collect_dfs_numbers(child, dfs_numbers)

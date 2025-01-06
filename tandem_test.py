@@ -1,6 +1,6 @@
 import unittest
-from s_tree import SuffixTree # Import the SuffixTree class
-from gust_tandem import find_tandem_repeats  # Import the find_tandem_repeats function
+from tree import SuffixTree 
+from gust_tadem import find_tandem_repeats  
 
 class TestTandemRepeats(unittest.TestCase):
     """
@@ -10,28 +10,20 @@ class TestTandemRepeats(unittest.TestCase):
     """
 
     def test_simple_repeats(self):
-        """
-        Test case for simple, non-branching repeats. In this case, the string has a 
-        clear repeated pattern that does not branch.
-        """
+
         text = "AACTGCAACTG"
         tree = SuffixTree(text)
         btr, nbtr = find_tandem_repeats(tree)
 
-        # Assert non-branching repeats are detected at expected positions
         self.assertIn((0, 1), btr)  # "AA" is a non-branching repeat at the start
         self.assertIn((6, 1), btr)  # "AA" in the second half is non-branching
 
     def test_branching_repeats(self):
-        """
-        Test case where there are branching repeats. The repeats can be found, 
-        but they branch, i.e., multiple substrings share the same prefix.
-        """
+
         text = "ACTGACTGACTTG"
         tree = SuffixTree(text)
         btr, nbtr = find_tandem_repeats(tree)
 
-        # Assert branching repeats are detected at expected positions
         self.assertIn((3, 4), btr)  # "GACT" is a branching repeat
         self.assertIn((10, 1), btr)  # "TT" is a branching repeat
         self.assertIn((2, 4), nbtr)  # "TGAC" is non-branching
@@ -39,9 +31,7 @@ class TestTandemRepeats(unittest.TestCase):
         self.assertIn((1, 4), nbtr)  # "CTGA" is non-branching
 
     def test_overlapping_repeats(self):
-        """
-        Test case for overlapping non-branching repeats where repeats share characters.
-        """
+
         text = "ABAABAABBBA"
         tree = SuffixTree(text)
         btr, nbtr = find_tandem_repeats(tree)
@@ -55,22 +45,16 @@ class TestTandemRepeats(unittest.TestCase):
         self.assertIn((8, 1), btr)  # "A" is a branching repeat
 
     def test_no_repeats(self):
-        """
-        Test case with a string that has no tandem repeats.
-        """
+
         text = "ACGT"
         tree = SuffixTree(text)
         btr, nbtr = find_tandem_repeats(tree)
-
-        # Assert no repeats are found in a string with no repetition
 
         self.assertEqual(btr, [])
         self.assertEqual(nbtr, [])
 
     def test_for_fun(self):
-        """
-        Test case with the string "mississippi" that is commonly used
-        """
+
         text = "mississippi"
         tree = SuffixTree(text)
         btr, nbtr = find_tandem_repeats(tree)

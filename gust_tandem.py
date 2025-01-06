@@ -53,17 +53,15 @@ def find_tandem_repeats(tree):
 
         return list(expanded_nbtr_results)
 
-    expanded_nbtr_results = expand_left_rotations()  # Add left rotations for NBTRs
+    expanded_nbtr_results = expand_left_rotations()
     return btr_results, expanded_nbtr_results
 
 
 if __name__ == "__main__":
     text = "ABAABAABBBA"
-    tree = SuffixTree(text)  # Construct the suffix tree
+    tree = SuffixTree(text) 
 
-    # Find tandem repeats and classify them
     btr_results, nbtr_results = find_tandem_repeats(tree)
 
-    # Print all the detected BTRs and NBTRs
     print(f"\nBranching Tandem Repeats (BTRs) detected: {btr_results}")
     print(f"\nNon-Branching Tandem Repeats (NBTRs) with Left Rotations: {nbtr_results}")

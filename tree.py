@@ -5,7 +5,7 @@ class SuffixTreeNode:
         self.min_dfs = None
         self.max_dfs = None
         self.dfs_number = None
-        self.string_depth = 0  
+        self.string_depth = 0 
 
 
 class SuffixTree:
@@ -29,7 +29,7 @@ class SuffixTree:
                     current_node.children[char] = SuffixTreeNode()
                 current_node = current_node.children[char]
                 depth += 1
-                current_node.string_depth = depth  # Update string depth
+                current_node.string_depth = depth  
             current_node.leaf_index = i
 
     def prune_tree(self):
@@ -49,7 +49,6 @@ class SuffixTree:
                 node.string_depth = child.string_depth
                 node.min_dfs = child.min_dfs
                 node.max_dfs = child.max_dfs
-        # Start pruning from the root node
         prune(self.root)
 
 

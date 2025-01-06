@@ -5,8 +5,8 @@ import seaborn as sns
 import sys
 sys.setrecursionlimit(10000)
 
-from s_tree import SuffixTreeNode
-from s_tree import SuffixTree
+from tree import SuffixTreeNode
+from tree import SuffixTree
 
 def generate_random_string(length):
     """Generate a random string of the given length containing the characters A, C, T, G, and a terminating '$'"""

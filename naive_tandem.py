@@ -13,7 +13,7 @@ def find_tandem_repeats(s):
     
     return repeats
 
-# Example usage
+
 input_string = "ABAABAABBBA"
 repeats = find_tandem_repeats(input_string)
 print(f"Tandem repeats found: {repeats}")
