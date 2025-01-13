@@ -19,19 +19,20 @@ def find_tandem_repeats(tree):
 
         # Step 2a: Identify Large(v) and Small(v)
         large_v = None
-        max_range = -1
         small_v = []
 
-        # Efficiently identify Large(v) and Small(v)
-        for child in v.children.values():
-            range_size = child.max_dfs - child.min_dfs + 1
-            if range_size > max_range:
-                if large_v:  # Add the previous large_v candidate to small_v
-                    small_v.extend(range(large_v.min_dfs, large_v.max_dfs + 1))
-                large_v = child
-                max_range = range_size
-            else:
-                small_v.extend(range(child.min_dfs, child.max_dfs + 1))
+        children_sorted = sorted(v.children.values(), key=lambda child: tree.text[child.min_dfs:], reverse=True)
+
+        # The first child in the sorted list is the lexicographically largest
+        if children_sorted:
+            large_v = children_sorted[0]
+            max_range = large_v.max_dfs - large_v.min_dfs + 1
+            small_v = [
+                idx
+                for child in children_sorted[1:]
+                for idx in range(child.min_dfs, child.max_dfs + 1)
+            ]
+
 
         # Step 2b: For each leaf i in Small(v), check if i + D(v) is in LL(v) and if S[i] != S[i + 2 * D(v)]
         d_v = v.string_depth
@@ -41,8 +42,7 @@ def find_tandem_repeats(tree):
 
             dfs_j = tree.get_dfs_from_suffix(suffix_j)
 
-            # Check if j (suffix) is in LL(v)
-            if dfs_j and v.min_dfs <= dfs_j <= v.max_dfs:
+            if dfs_j and v.min_dfs <= dfs_j <= v.max_dfs: # Check if j (suffix) is in LL(v)
                 if tree.text[suffix_i] != tree.text[suffix_i + 2 * d_v]:
                     btr_results.add((suffix_i, d_v))  # Report BTR (i, d(v))
 
@@ -71,7 +71,6 @@ def find_tandem_repeats(tree):
 
     # Step 2: Process all internal nodes of the suffix tree using efficient DFS traversal
     def dfs_process(node):
-        """Perform DFS traversal to process all nodes."""
         if node in marked_nodes:
             return
         process_node(node)

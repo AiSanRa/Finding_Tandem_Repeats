@@ -1,8 +1,8 @@
-from s_tree import SuffixTree
+from tree import SuffixTree
 
 def find_tandem_repeats(tree):
     """
-    Identifies all tandem repeats and classifies them into branching and non-branching.
+    Identifies all tandem repeats and classifies them into branching and non-branching using the Stoye nd Gusfield algorithm.
     """
     btr_results = []
     nbtr_results = []
@@ -14,25 +14,22 @@ def find_tandem_repeats(tree):
 
         min_dfs, max_dfs, string_depth = node.min_dfs, node.max_dfs, node.string_depth
 
-        if string_depth == 0:
+        if string_depth == 0: 
             return
 
-        for dfs_i in range(min_dfs, max_dfs + 1):
+        for dfs_i in range(min_dfs, max_dfs + 1): #i in the LL(v)
             suffix_i = tree.get_suffix_from_dfs(dfs_i)
-            if suffix_i is None:
-                continue
 
             suffix_j = suffix_i + string_depth
             dfs_j = tree.get_dfs_from_suffix(suffix_j)
 
-            if not (min_dfs <= dfs_j <= max_dfs):
-                continue
 
-            # Check if it's branching or non-branching
-            if tree.text[suffix_i + string_depth] != tree.text[suffix_i + 2 * string_depth]:
-                btr_results.append((suffix_i, string_depth))  # Branching Tandem Repeat (BTR)
-            else:
-                nbtr_results.append((suffix_i, string_depth))  # Non-Branching Tandem Repeat (NBTR)
+            if dfs_j in range(min_dfs, max_dfs + 1): # j is in LL(v)
+                # Check if it's branching or non-branching
+                if tree.text[suffix_i + string_depth] != tree.text[suffix_i + 2 * string_depth]:
+                    btr_results.append((suffix_i, string_depth))  # Branching Tandem Repeat (BTR)
+                else:
+                    nbtr_results.append((suffix_i, string_depth))  # Non-Branching Tandem Repeat (NBTR)
 
     def dfs_process(node):
         """Perform a DFS traversal to process all nodes."""
